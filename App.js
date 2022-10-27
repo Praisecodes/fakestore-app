@@ -1,41 +1,48 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import Header from './components/header';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function App() {
   const [products, setProducts] = useState([]);
+  const [title, setTitle] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-    .then(res=>res.json())
-    .then((data)=>{
-      setProducts([...data]);
-      // console.log(products);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+      .then(res => res.json())
+      .then((data) => {
+        setProducts([...data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, []);
 
-  const renderItem = ({item}) =>{
-    <Text style={styles.itemView}>{item.category}</Text>
-  }
   return (
     <>
-    <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.mainBody}>
-        {/* <Text style={styles.text}>About To Fill This Space Up!!</Text> */}
-        <FlatList 
-        data={products}
-        keyExtractor={item=>item.id}
-        renderItem={renderItem}
-        />
+      <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
+      <View style={styles.container}>
+        <Header title={title} />
+        <ScrollView>
+          <View style={styles.mainBody}>
+            {
+              products.map(item => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={()=>{setTitle(item.category)}}
+                >
+                  <Text
+                    style={styles.itemView}
+                  >
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            }
+          </View>
+        </ScrollView>
       </View>
-    </View>
     </>
   );
 }
@@ -49,10 +56,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 5,
   },
   itemView: {
-    width: wp('75%'),
+    width: wp('97%'),
     backgroundColor: 'tomato',
     paddingVertical: 10,
+    paddingHorizontal: 9,
+    marginTop: 7,
+    borderRadius: 3,
+    fontSize: 20
   }
 });

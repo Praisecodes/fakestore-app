@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function Header() {
-    const [searchInput, setSearchInput] = useState("");
-    const [change, setChange] = useState("");
+export default function Header({title}) {
+    const [searchInput, setSearchInput] = useState(title);
+    const [change, setChange] = useState('');
 
     return (
         <>
-            <View>
+            <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>
                     {
                         (searchInput == "") ? 'Fakestore' : searchInput
@@ -31,13 +31,14 @@ export default function Header() {
 const styles = StyleSheet.create({
     text: {
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 15
     },
     headerText: {
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 25,
         paddingLeft: 10,
-        marginBottom: 20
+        marginBottom: 5,
+        paddingTop: 10,
     },
     searchBar: {
         display: 'flex',
@@ -50,9 +51,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: wp('75%'),
         marginRight: 10,
-        fontSize: 18,
-        padding: 10,
-        borderRadius: 4
+        fontSize: 15,
+        padding: 6,
+        borderRadius: 3,
+        height: 40,
     },
     button: {
         display: 'flex',
@@ -60,7 +62,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'tomato',
         borderRadius: 4,
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
     },
+    headerContainer: {
+        shadowOpacity: 0.2,
+        shadowColor: '#333',
+        shadowOffset: {width: -2, height: 4},
+        shadowRadius: 3,
+    }
 })
