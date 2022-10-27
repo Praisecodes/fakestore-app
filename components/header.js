@@ -2,23 +2,19 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function Header({title}) {
-    const [searchInput, setSearchInput] = useState(title);
-    const [change, setChange] = useState('');
-
+export default function Header(props) {
     return (
         <>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>
                     {
-                        (searchInput == "") ? 'Fakestore' : searchInput
+                        (props.title == "") ? 'Fakestore' : props.title
                     }
                 </Text>
                 <View style={styles.searchBar}>
-                    <TextInput style={styles.input} placeholder="Search..." onChangeText={(val) => { setChange(val) }} />
+                    <TextInput style={styles.input} placeholder="Search..." />
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => { setSearchInput(change) }}
                     >
                         <Text style={styles.text}>O</Text>
                     </TouchableOpacity>
@@ -31,7 +27,8 @@ export default function Header({title}) {
 const styles = StyleSheet.create({
     text: {
         fontWeight: 'bold',
-        fontSize: 15
+        fontSize: 15,
+        color: 'white',
     },
     headerText: {
         fontWeight: 'bold',

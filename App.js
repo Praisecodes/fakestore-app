@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import Header from './components/header';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -26,20 +26,15 @@ export default function App() {
         <Header title={title} />
         <ScrollView>
           <View style={styles.mainBody}>
-            {
-              products.map(item => (
-                <TouchableOpacity
-                  key={item.id}
-                  onPress={()=>{setTitle(item.category)}}
-                >
-                  <Text
-                    style={styles.itemView}
-                  >
-                    {item.title}
-                  </Text>
+            <FlatList 
+              keyExtractor={(item)=>item.id}
+              data={products}
+              renderItem={({item})=>(
+                <TouchableOpacity onPress={()=>{setTitle(item.category)}}>
+                  <Text style={styles.itemView}>{item.title}</Text>
                 </TouchableOpacity>
-              ))
-            }
+              )}
+            />
           </View>
         </ScrollView>
       </View>
