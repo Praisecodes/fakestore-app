@@ -4,10 +4,11 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 
 export default function App() {
   const [searchInput, setSearchInput] = useState("");
+  const [change, setChange] = useState("");
 
   return (
     <>
-    <StatusBar style='light' translucent={false} />
+    <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
     <View style={styles.container}>
       <View>
         <Text style={styles.headerText}>
@@ -16,13 +17,18 @@ export default function App() {
           }
         </Text>
         <View style={styles.searchBar}>
-          <TextInput style={styles.input} placeholder="Search..." onChangeText={(val)=>{setSearchInput(val)}} />
+          <TextInput style={styles.input} placeholder="Search..." onChangeText={(val)=>{setChange(val)}} />
           <TouchableOpacity 
           style={styles.button}
+          onPress={()=>{setSearchInput(change)}}
           >
             <Text style={styles.text}>O</Text>
           </TouchableOpacity>
         </View>
+      </View>
+
+      <View style={styles.mainBody}>
+        <Text style={styles.text}>About To Fill This Space Up!!</Text>
       </View>
     </View>
     </>
@@ -31,7 +37,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
+    flex: 1,
   },
   text: {
     fontWeight: 'bold',
@@ -54,8 +61,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 300, 
     marginRight: 10, 
-    fontSize: 20, 
-    padding: 10
+    fontSize: 18, 
+    padding: 10,
+    borderRadius: 4
   },
   button: {
     display: 'flex',
@@ -65,5 +73,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: 50,
     height: 50,
+  }, 
+
+  mainBody: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
