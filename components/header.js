@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Header() {
     const [searchInput, setSearchInput] = useState("");
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     input: {
         borderColor: '#777',
         borderWidth: 1,
-        width: 300,
+        width: wp('75%'),
         marginRight: 10,
         fontSize: 18,
         padding: 10,
