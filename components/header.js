@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function Header(props) {
+export default function Header() {
     return (
         <>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>
-                    {
+                    {/* {
                         (props.title == "") ? 'Fakestore' : props.title
-                    }
+                    } */}
+                    Fakestore
                 </Text>
                 <View style={styles.searchBar}>
                     <TextInput style={styles.input} placeholder="Search..." />

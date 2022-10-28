@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback, FlatList, Alert } from 'react-native';
 import Header from './components/header';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
@@ -23,14 +23,19 @@ export default function App() {
     <>
       <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
       <View style={styles.container}>
-        <Header title={title} />
+        <Header />
         <ScrollView>
           <View style={styles.mainBody}>
             <FlatList 
               keyExtractor={(item)=>item.id}
               data={products}
               renderItem={({item})=>(
-                <TouchableWithoutFeedback onPress={()=>{setTitle(item.id)}}>
+                <TouchableWithoutFeedback onPress={()=>{
+                  setTitle(item.id);
+                  Alert.alert('Message', `Here is the ID of the clicked item ${item.id}`,[
+                    {text: 'Seen!', onPress: ()=>{}}
+                  ])
+                }}>
                   <Text style={styles.itemView}>{item.title}</Text>
                 </TouchableWithoutFeedback>
               )}
