@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Header() {
     return (
@@ -17,7 +18,7 @@ export default function Header() {
                     <TouchableOpacity
                         style={styles.button}
                     >
-                        <Text style={styles.text}>O</Text>
+                        <Ionicons name='search-outline' color={'white'} size={15} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -36,13 +37,16 @@ const styles = StyleSheet.create({
         fontSize: 25,
         paddingLeft: 10,
         marginBottom: 5,
-        paddingTop: 10,
+        paddingVertical: 10,
+        backgroundColor: "#223",
+        color: 'white',
     },
     searchBar: {
         display: 'flex',
         flexDirection: 'row',
         padding: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#fcfcfc',
     },
     input: {
         borderColor: '#777',
@@ -68,5 +72,6 @@ const styles = StyleSheet.create({
         shadowColor: '#333',
         shadowOffset: {width: -2, height: 4},
         shadowRadius: 3,
+        zIndex: 10,
     }
 })

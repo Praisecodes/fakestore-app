@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from './components/header';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import ProductList from './components/productlist';
 
 export default function App() {
   const [products, setProducts] = useState([]);
-  const [title, setTitle] = useState("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -24,30 +24,21 @@ export default function App() {
       <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
       <View style={styles.container}>
         <Header />
-        <ScrollView>
-          <View style={styles.mainBody}>
-            <FlatList 
-              keyExtractor={(item)=>item.id}
-              data={products}
-              renderItem={({item})=>(
-                <TouchableWithoutFeedback onPress={()=>{
-                  setTitle(item.id);
-                  Alert.alert('Message', `Here is the ID of the clicked item ${item.id}`,[
-                    {text: 'Seen!', onPress: ()=>{}}
-                  ])
-                }}>
-                  <Text style={styles.itemView}>{item.title}</Text>
-                </TouchableWithoutFeedback>
-              )}
-            />
-            <TouchableWithoutFeedback onPress={()=>{setTitle("Fakestore")}}>
-              <Text style={styles.actionBtn}>Change</Text>
-            </TouchableWithoutFeedback>
-          </View>
-        </ScrollView>
+        <View style={styles.mainBody}>
+          <Text style={styles.product}>Products</Text>
+          <ScrollView>
+            {
+              products.map((item) => {
+                return (
+                  <ProductList item={item} key={item.id} />
+                )
+              })
+            }
+          </ScrollView>
+        </View>
       </View>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -61,23 +52,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 5,
   },
-  itemView: {
-    width: wp('97%'),
-    backgroundColor: 'tomato',
-    paddingVertical: 10,
-    paddingHorizontal: 9,
-    marginTop: 10,
-    borderRadius: 3,
-    fontSize: 20
-  },
-  actionBtn: {
-    backgroundColor: '#00ff00',
-    color: 'white',
-    paddingVertical: 7,
-    paddingHorizontal: 40,
-    fontSize: 30,
-    borderRadius: 5,
-    marginTop: 14,
-    color: 'black',
+  product: {
+    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
+    fontSize: 25,
+    textAlign: 'left',
+    width: wp('100%'),
+    padding: 10,
   }
 });
