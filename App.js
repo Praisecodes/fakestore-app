@@ -9,25 +9,35 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator 
+        initialRouteName='Home'
+        screenOptions={
+          {
+            headerTintColor: 'white',
+            headerTitleStyle:{
+              fontSize: 27,
+              fontWeight: 'bold'
+            },
+            headerStyle: {
+              backgroundColor: '#223'
+            }
+          }
+        }
+      >
         <Stack.Screen 
           name='Home' 
           component={Home} 
           options={
-            {
-              title: 'Fakestore',
-              headerStyle: {
-                backgroundColor: '#223'
-              },
-              headerTintColor: 'white',
-              headerTitleStyle:{
-                fontSize: 27,
-                fontWeight: 'bold'
-              }
-            }
+            {title: 'Fakestore'}
           }
         />
-        <Stack.Screen name='Review' component={ProductReview} />
+        <Stack.Screen 
+          name='Review' 
+          component={ProductReview} 
+          options={
+            { title: 'Product Review', }
+          }
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
