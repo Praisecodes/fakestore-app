@@ -1,14 +1,9 @@
 import { TouchableWithoutFeedback, View, Text, Alert, StyleSheet } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { useFonts } from 'expo-font';
 
 export default function ProductList({ item }) {
-    const [fontsLoaded] = useFonts({
-        'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
-    });
-
     return (
-        (!fontsLoaded) ? null : <TouchableWithoutFeedback
+        <TouchableWithoutFeedback
             onPress={() => {
                 Alert.alert('Message', `Product: ${item.title}`, [
                     {

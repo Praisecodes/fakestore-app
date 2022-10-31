@@ -7,12 +7,6 @@ export default function Header() {
     return (
         <>
             <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>
-                    {/* {
-                        (props.title == "") ? 'Fakestore' : props.title
-                    } */}
-                    Fakestore
-                </Text>
                 <View style={styles.searchBar}>
                     <TextInput style={styles.input} placeholder="Search..." />
                     <TouchableOpacity
@@ -27,11 +21,6 @@ export default function Header() {
 }
 
 const styles = StyleSheet.create({
-    text: {
-        fontWeight: 'bold',
-        fontSize: 15,
-        color: 'white',
-    },
     headerText: {
         fontWeight: 'bold',
         fontSize: 25,

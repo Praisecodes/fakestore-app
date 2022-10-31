@@ -1,63 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import Header from './components/header';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import ProductList from './components/productlist';
+import React from 'react';
+import Home from './screens/home';
+import ProductReview from './screens/productReview';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then((data) => {
-        setProducts([...data]);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, []);
-
   return (
-    <>
-      <StatusBar style='light' backgroundColor={'#223'} translucent={false} />
-      <View style={styles.container}>
-        <Header />
-        <View style={styles.mainBody}>
-          <Text style={styles.product}>Products</Text>
-          <ScrollView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen 
+          name='Home' 
+          component={Home} 
+          options={
             {
-              products.map((item) => {
-                return (
-                  <ProductList item={item} key={item.id} />
-                )
-              })
+              title: 'Fakestore',
+              headerStyle: {
+                backgroundColor: '#223'
+              },
+              headerTintColor: 'white',
+              headerTitleStyle:{
+                fontSize: 27,
+                fontWeight: 'bold'
+              }
             }
-          </ScrollView>
-        </View>
-      </View>
-    </>
+          }
+        />
+        <Stack.Screen name='Review' component={ProductReview} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-  mainBody: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 5,
-  },
-  product: {
-    fontWeight: 'bold',
-    fontFamily: 'Poppins-Regular',
-    fontSize: 25,
-    textAlign: 'left',
-    width: wp('100%'),
-    padding: 10,
-  }
-});
