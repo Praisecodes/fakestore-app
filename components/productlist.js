@@ -5,7 +5,14 @@ export default function ProductList({ item, nav }) {
     return (
         <TouchableWithoutFeedback
             onPress={() => {
-                nav('Review')
+                nav('Review', {
+                    itemName: item.title,
+                    description: item.description,
+                    price: item.price,
+                    rating: item.rating.rate,
+                    rateCount: item.rating.count,
+                    category: item.category
+                })
             }}
         >
             <View style={styles.itemView}>

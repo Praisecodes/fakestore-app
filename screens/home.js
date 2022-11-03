@@ -13,7 +13,6 @@ export default function Home({navigation}) {
             .then(res => res.json())
             .then((data) => {
                 setProducts([...data]);
-                console.log(data)
             })
             .catch((err) => {
                 console.log(err);
@@ -27,7 +26,6 @@ export default function Home({navigation}) {
                 <Header />
                 <View style={styles.mainBody}>
                     <Text style={styles.product}>Products</Text>
-                    {/* {console.log(products)} */}
                     <ScrollView>
                         {
                             products.map((item) => (
