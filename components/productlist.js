@@ -1,16 +1,11 @@
 import { TouchableWithoutFeedback, View, Text, Alert, StyleSheet } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-export default function ProductList({ item }) {
+export default function ProductList({ item, nav }) {
     return (
         <TouchableWithoutFeedback
             onPress={() => {
-                Alert.alert('Message', `Product: ${item.title}`, [
-                    {
-                        text: 'Seen!',
-                        onPress: () => { }
-                    }
-                ])
+                nav('Review')
             }}
         >
             <View style={styles.itemView}>

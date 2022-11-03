@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import Header from '../components/header';
 import ProductList from '../components/productlist';
 import { styles } from '../styles/style';
 
-export default function Home() {
+export default function Home({navigation}) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -13,6 +13,7 @@ export default function Home() {
             .then(res => res.json())
             .then((data) => {
                 setProducts([...data]);
+                console.log(data)
             })
             .catch((err) => {
                 console.log(err);
@@ -26,13 +27,13 @@ export default function Home() {
                 <Header />
                 <View style={styles.mainBody}>
                     <Text style={styles.product}>Products</Text>
+                    {/* {console.log(products)} */}
                     <ScrollView>
                         {
-                            products.map((item) => {
-                                return (
-                                    <ProductList item={item} key={item.id} />
+                            products.map((item) => (
+                                    <ProductList item={item} nav={navigation.navigate} key={item.id} />
                                 )
-                            })
+                            )
                         }
                     </ScrollView>
                 </View>
